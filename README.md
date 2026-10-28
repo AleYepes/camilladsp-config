@@ -1,0 +1,1 @@
+camilladsp -c ~/Documents/camilladsp-configs/config1.yml

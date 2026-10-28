@@ -1,0 +1,30 @@
+devices:
+  samplerate: 48000
+  chunksize: 1024
+  enable_rate_adjust: true
+  capture:
+    type: CoreAudio
+    channels: 2
+    device: "BlackHole 2ch"
+  playback:
+    type: CoreAudio
+    channels: 2
+    device: "External Headphones"
+
+filters:
+  preamp: {type: Gain, parameters: {gain: -3.0}}
+  b32:    {type: Biquad, parameters: {type: Peaking, freq: 32,    q: 1.4, gain: 10.5}}
+  b64:    {type: Biquad, parameters: {type: Peaking, freq: 64,    q: 1.4, gain: 1.5}}
+  b125:   {type: Biquad, parameters: {type: Peaking, freq: 125,   q: 1.4, gain: 0.5}}
+  b250:   {type: Biquad, parameters: {type: Peaking, freq: 250,   q: 1.4, gain: 0.0}}
+  b500:   {type: Biquad, parameters: {type: Peaking, freq: 500,   q: 1.4, gain: -0.5}}
+  b1k:    {type: Biquad, parameters: {type: Peaking, freq: 1000,  q: 1.4, gain: 0.0}}
+  b2k:    {type: Biquad, parameters: {type: Peaking, freq: 2000,  q: 1.4, gain: 0.5}}
+  b4k:    {type: Biquad, parameters: {type: Peaking, freq: 4000,  q: 1.4, gain: 0.5}}
+  b8k:    {type: Biquad, parameters: {type: Peaking, freq: 8000,  q: 1.4, gain: 0.0}}
+  b16k:   {type: Biquad, parameters: {type: Peaking, freq: 16000, q: 1.4, gain: 0.5}}
+
+pipeline:
+  - type: Filter
+    channels: [0, 1]
+    names: [preamp, b32, b64, b125, b250, b500, b1k, b2k, b4k, b8k, b16k]
